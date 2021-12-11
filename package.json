@@ -10,8 +10,10 @@
     "dev:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css --watch",
     "lint": "eslint --config .eslintrc.js ./app --ext .ts,.tsx,.js --fix",
     "lint:prod": "eslint --config .eslintrc.prod.js ./app --ext .ts,.tsx,.js --fix",
+    "lint-staged": "lint-staged --config .lintstagedrc.json",
     "prettier": "prettier --config .prettierrc.json --write \"app/**/*.{ts,tsx}\"",
-    "postinstall": "remix setup node && husky install"
+    "postinstall": "remix setup node && husky install",
+    "ts:check": "tsc"
   },
   "dependencies": {
     "@remix-run/react": "^1.0.6",
@@ -27,8 +29,8 @@
     "@types/react-dom": "17.0.11",
     "@typescript-eslint/eslint-plugin": "5.6.0",
     "@typescript-eslint/parser": "5.6.0",
-    "concurrently": "6.4.0",
     "classcat": "5.0.3",
+    "concurrently": "6.4.0",
     "eslint": "8.4.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard": "16.0.3",
