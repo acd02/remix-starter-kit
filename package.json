@@ -6,8 +6,9 @@
   "scripts": {
     "build": "npm run build:css && remix build",
     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css",
-    "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
+    "dev": "concurrently \"remix watch\" \"npm:dev:netlify\" \"npm:dev:css\"",
     "dev:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css --watch",
+    "dev:netlify": "cross-env NODE_ENV=development netlify dev",
     "lint": "eslint --config .eslintrc.js ./app --ext .ts,.tsx,.js --fix",
     "lint:prod": "eslint --config .eslintrc.prod.js ./app --ext .ts,.tsx,.js --fix",
     "lint-staged": "lint-staged --config .lintstagedrc.json",
@@ -16,9 +17,10 @@
     "ts:check": "tsc"
   },
   "dependencies": {
+    "@netlify/functions": "^0.7.2",
+    "@remix-run/netlify": "^1.0.6",
     "@remix-run/react": "^1.0.6",
     "@remix-run/serve": "^1.0.6",
-    "@remix-run/vercel": "^1.0.6",
     "acd-utils": "8.0.0",
     "await-to-js": "3.0.0",
     "react": "^17.0.2",
@@ -33,6 +35,7 @@
     "@typescript-eslint/parser": "5.6.0",
     "classcat": "5.0.3",
     "concurrently": "6.4.0",
+    "cross-env": "7.0.3",
     "eslint": "8.4.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard": "16.0.3",
