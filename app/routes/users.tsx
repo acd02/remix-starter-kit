@@ -1,25 +1,29 @@
 import { LoaderFunction, MetaFunction, NavLink, Outlet, useLoaderData } from 'remix'
 
-import { constant, identity } from '~/utils/function'
-import { httpGet } from '~/utils/http'
-import type { User } from '~types/user'
+import { sanity } from '~sanity'
 
-export const meta: MetaFunction = () => {
+const meta: MetaFunction = () => {
   return {
     title: 'users',
   }
 }
 
-export const loader: LoaderFunction = async () => {
-  return (
-    await httpGet<User[], unknown>('https://jsonplaceholder.typicode.com/users')
-  ).fold(constant([]), identity)
+type LoaderData = { userName: string; slug: string; id: string }[]
+
+const loader: LoaderFunction = async (): Promise<LoaderData> => {
+  const sanityReq = await sanity.fetch<LoaderData>(`*[_type == "user"]{
+    "id": _id,
+    "userName": name,
+    "slug": slug.current
+  }`)
+
+  return sanityReq
 }
 
 export default function Users() {
-  const users = useLoaderData<User[]>()
+  const data = useLoaderData<LoaderData>()
 
-  const userLinks = users.map(({ id, name }) => (
+  const userLinks = data.map(({ userName, slug, id }) => (
     <li key={id} className="block mb-2 w-[fit-content]">
       <NavLink
         prefetch="intent"
@@ -28,9 +32,9 @@ export default function Users() {
             ? 'border-b border-b-purple-400 text-purple-400'
             : 'border-b border-b-transparent'
         }
-        to={String(id)}
+        to={slug}
       >
-        {name}
+        {userName}
       </NavLink>
     </li>
   ))
@@ -42,3 +46,5 @@ export default function Users() {
     </>
   )
 }
+
+export { meta, loader }
