@@ -17,6 +17,7 @@
       "~components/*": ["./app/components/*"],
       "~handles": ["./app/handles/index.ts"],
       "~sanity": ["./sanity/index.ts"],
+      "~svg": ["./app/svg/index.tsx"],
       "~types/*": ["./app/types/*"],
       "~utils/*": ["./app/utils/*"]
     },
