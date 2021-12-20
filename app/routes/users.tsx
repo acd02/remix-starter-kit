@@ -11,7 +11,7 @@ const meta: MetaFunction = () => {
 type LoaderData = { userName: string; slug: string; id: string }[]
 
 const loader: LoaderFunction = async (): Promise<LoaderData> => {
-  const sanityReq = await sanity.fetch<LoaderData>(`*[_type == "user"]{
+  const sanityReq = await sanity.fetch<LoaderData>(`*[_type == "user"] | order(name asc){
     "id": _id,
     "userName": name,
     "slug": slug.current
