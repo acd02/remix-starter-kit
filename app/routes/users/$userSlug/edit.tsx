@@ -58,7 +58,7 @@ function UserEdit() {
   return (
     <>
       <h4 className="my-4 text-2xl font-bold text-gray-900">Editing user email:</h4>
-      <Form className="max-w-xs" method="post">
+      <Form className="max-w-xs" method="patch">
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           Email
         </label>

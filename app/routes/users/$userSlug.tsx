@@ -56,7 +56,14 @@ function User() {
     })
   }, [pathname])
 
-  const content = isOnEditPage ? null : (
+  const GridRow = ({ label, value }: { label: string; value: string }) => (
+    <div>
+      <span className="block text-sm font-medium text-gray-500">{label}</span>
+      <span className="block mt-1 text-sm text-gray-900">{value}</span>
+    </div>
+  )
+
+  const userDetailsBlock = isOnEditPage ? null : (
     <div ref={rootRef}>
       <h4 className="my-4 text-2xl font-bold text-gray-900">User details:</h4>
       <div className="grid grid-cols-[1fr_1fr] max-w-[30rem] gap-4 break-all">
@@ -67,9 +74,9 @@ function User() {
             src={imageUrl}
           />
         </div>
-        <Row label="Name" value={name} />
-        <Row label="Email" value={email} />
-        <Row label="Phone" value={phone} />
+        <GridRow label="Name" value={name} />
+        <GridRow label="Email" value={email} />
+        <GridRow label="Phone" value={phone} />
         <Link
           className="[grid-column:1_/_1] text-center rounded-md px-4 py-2 font-medium bg-purple-400"
           to="edit"
@@ -82,19 +89,9 @@ function User() {
 
   return (
     <>
-      {content}
+      {isOnEditPage ? null : userDetailsBlock}
       <Outlet context={{ email, id }} />
     </>
-  )
-}
-
-// components
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <span className="block text-sm font-medium text-gray-500">{label}</span>
-      <span className="block mt-1 text-sm text-gray-900">{value}</span>
-    </div>
   )
 }
 
