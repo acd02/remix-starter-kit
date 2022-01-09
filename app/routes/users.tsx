@@ -24,7 +24,7 @@ export default function Users() {
   const data = useLoaderData<LoaderData>()
 
   const userLinks = data.map(({ userName, slug, id }) => (
-    <li key={id} className="block mb-2 w-[fit-content]">
+    <li key={id} className="block w-fit mb-2">
       <NavLink
         prefetch="intent"
         className={({ isActive }) =>

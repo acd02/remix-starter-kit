@@ -63,7 +63,7 @@ function User() {
     </div>
   )
 
-  const userDetailsBlock = isOnEditPage ? null : (
+  const userDetailsBlock = (
     <div ref={rootRef}>
       <h4 className="my-4 text-2xl font-bold text-gray-900">User details:</h4>
       <div className="grid grid-cols-[1fr_1fr] max-w-[30rem] gap-4 break-all">
